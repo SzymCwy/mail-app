@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from mailapp.views import Mailbox_list
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('mailbox/', Mailbox_list.as_view()),
 ]
