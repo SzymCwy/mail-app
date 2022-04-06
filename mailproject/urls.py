@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from mailapp.views import Mailbox_list
+from mailapp.views import Mailbox_list, Email_list, Template_list, Email_Create
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('mailbox/', Mailbox_list.as_view()),
+    path('email/', Email_list.as_view()),
+    path('template/', Template_list.as_view()),
+    path('email/create/', Email_Create.as_view())
 ]

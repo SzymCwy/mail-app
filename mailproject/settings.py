@@ -22,6 +22,7 @@ env = environ.Env(
     PASSWORD=(str, False),
     HOST=(str, False),
     PORT=(str, False),
+    CELERY_URL=(str, False),
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -150,3 +151,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CELERY_BROKER_URL = env('CELERY_URL')
+
+CELERY_ACCEPT_CONTENT = ['json']
+
+CELERY_TASK_SERIALIZER = 'json'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

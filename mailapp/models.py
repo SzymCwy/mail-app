@@ -1,6 +1,6 @@
+import uuid
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
-from django.db.models import Count
 
 
 class Mailbox(models.Model):
@@ -34,11 +34,12 @@ class Template(models.Model):
 
 
 class Email(models.Model):
+    id = models.UUIDField(default=uuid.uuid4, primary_key=True)
     mailbox = models.ForeignKey(Mailbox, on_delete=models.CASCADE)
     template = models.ForeignKey(Template, on_delete=models.CASCADE)
-    to = ArrayField(models.CharField(max_length=50, blank=False, null=False), blank=False)
-    cc = ArrayField(models.CharField(max_length=50, blank=False, null=False), blank=True)
-    bcc = ArrayField(models.CharField(max_length=50, blank=False, null=False), blank=True)
+    to = models.CharField(max_length=50)
+    cc = ArrayField(models.CharField(max_length=50, blank=False, null=False), blank=True, null=True)
+    bcc = ArrayField(models.CharField(max_length=50, blank=False, null=False), blank=True, null=True)
     reply_to = models.EmailField(default=None)
     sent_date = models.DateTimeField(default=None)
     date = models.DateTimeField(auto_now=True)

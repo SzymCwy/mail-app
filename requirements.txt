@@ -3,3 +3,4 @@ django_environ==0.8.1
 djangorestframework
 psycopg2
 django-filter
+celery
