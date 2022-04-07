@@ -19,7 +19,7 @@ class Template_serializer(serializers.ModelSerializer):
 class Email_serializer(serializers.ModelSerializer):
     class Meta:
         model = Email
-        fields = '__all__'
+        fields = ['mailbox', 'template', 'to', 'reply_to', 'sent_date', 'date']
 
     def create(self, validated_data):
         send_mail(validated_data)
