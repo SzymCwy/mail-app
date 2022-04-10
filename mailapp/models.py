@@ -1,3 +1,4 @@
+import datetime
 import uuid
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
@@ -11,7 +12,7 @@ class Mailbox(models.Model):
     email_from = models.CharField(max_length=50)
     use_ssl = models.BooleanField(default=True)
     is_active = models.BooleanField(default=False)
-    date = models.DateTimeField(auto_now=True)
+    date = models.DateTimeField(default=datetime.date.today())
     last_update = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -41,7 +42,7 @@ class Email(models.Model):
     cc = ArrayField(models.CharField(max_length=50, blank=False, null=False), blank=True, null=True)
     bcc = ArrayField(models.CharField(max_length=50, blank=False, null=False), blank=True, null=True)
     reply_to = models.EmailField(default=None)
-    sent_date = models.DateTimeField(default=None)
+    sent_date = models.DateTimeField(auto_now=True)
     date = models.DateTimeField(auto_now=True)
 
     def __str__(self):

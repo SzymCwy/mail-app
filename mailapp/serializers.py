@@ -21,13 +21,15 @@ class Template_serializer(serializers.ModelSerializer):
 
 class Email_serializer(serializers.ModelSerializer):
 
-    to1 = serializers.CharField(required=True, label='To:', help_text='Add email and separate them by ","')
-    cc1 = serializers.CharField(required=False, label='Cc:', help_text='Add email and separate them by ","')
-    bcc1 = serializers.CharField(required=False, label='Bcc:', help_text='Add email and separate them by ","')
+    to1 = serializers.CharField(required=True, label='To:', help_text='Add email and separate them by ","', source='to')
+    cc1 = serializers.CharField(required=False, label='Cc:', help_text='Add email and separate them by ","',
+                                source='cc')
+    bcc1 = serializers.CharField(required=False, label='Bcc:', help_text='Add email and separate them by ","',
+                                 source='bcc')
 
     class Meta:
         model = Email
-        fields = ['to1', 'cc1', 'bcc1', 'mailbox', 'template', 'reply_to', 'sent_date', 'date']
+        fields = ['to1', 'cc1', 'bcc1', 'mailbox', 'template', 'reply_to']
 
     def create(self, validated_data):
 
