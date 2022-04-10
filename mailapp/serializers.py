@@ -34,9 +34,13 @@ class Email_serializer(serializers.ModelSerializer):
         """As array fields can not be shown in HTML I create 3 temporary char fields, convert them into arrays and put
         to create"""
         field_list = ['to', 'cc', 'bcc']
+
         for field in field_list:
-            validated_data[f'{field}'] = self.data[f'{field}1'].split(',')
-            del validated_data[f'{field}1']
+            try:
+                validated_data[f'{field}'] = self.data[f'{field}1'].split(',')
+                del validated_data[f'{field}1']
+            except KeyError:
+                validated_data[f'{field}'] = None
 
         if validated_data.get('mailbox').is_active:
             if send_mail(validated_data):
