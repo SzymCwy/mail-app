@@ -19,13 +19,11 @@ class Template_serializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class Email_serializer(serializers.ModelSerializer):
+class Email_serializerCreate(serializers.ModelSerializer):
 
-    to1 = serializers.CharField(required=True, label='To:', help_text='Add email and separate them by ","', source='to')
-    cc1 = serializers.CharField(required=False, label='Cc:', help_text='Add email and separate them by ","',
-                                source='cc')
-    bcc1 = serializers.CharField(required=False, label='Bcc:', help_text='Add email and separate them by ","',
-                                 source='bcc')
+    to1 = serializers.CharField(required=True, label='To:', help_text='Add email and separate them by ","')
+    cc1 = serializers.CharField(required=False, label='Cc:', help_text='Add email and separate them by ","')
+    bcc1 = serializers.CharField(required=False, label='Bcc:', help_text='Add email and separate them by ","')
 
     class Meta:
         model = Email
@@ -52,3 +50,9 @@ class Email_serializer(serializers.ModelSerializer):
                 raise serializers.ValidationError('Wrong credentials')
         else:
             raise serializers.ValidationError('Account is not active')
+
+
+class EmailList(serializers.ModelSerializer):
+    class Meta:
+        model = Email
+        fields = '__all__'
