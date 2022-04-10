@@ -17,7 +17,31 @@ Install required libraries
 ```bash 
 pip install -r requirements.txt
 ```
+Run migrations to create database migrations, firstly for app because of modified User.
+```bash 
+py manage.py makemigrations
+```
 
+```bash 
+py manage.py migrate
+```
+
+```bash 
+py manage.py makemigrations mailapp
+```
+```bash 
+py manage.py migrate mailapp
+```
+
+Create superuser to manage program
+```bash 
+py manage.py migrate mailapp
+```
+
+Run the server
+```bash 
+py manage.py migrate mailapp
+```
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file.
