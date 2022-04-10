@@ -1,6 +1,8 @@
 from .models import Mailbox, Template, Email
 from rest_framework import generics
 from .serializers import Mailbox_serializer, Email_serializer, Template_serializer
+from django_filters import rest_framework as filters
+from .filters import EmailFilter
 
 
 class MailboxListCreate(generics.ListCreateAPIView):
@@ -16,6 +18,8 @@ class MailboxDetail(generics.RetrieveUpdateDestroyAPIView):
 class EmailListCreate(generics.ListCreateAPIView):
     queryset = Email.objects.all()
     serializer_class = Email_serializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = EmailFilter
 
 
 class TemplateListCreate(generics.ListCreateAPIView):

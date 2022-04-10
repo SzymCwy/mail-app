@@ -34,10 +34,10 @@ class Template(models.Model):
 
 
 class Email(models.Model):
-    id = models.UUIDField(default=uuid.uuid4, primary_key=True)
-    mailbox = models.ForeignKey(Mailbox, on_delete=models.CASCADE)
-    template = models.ForeignKey(Template, on_delete=models.CASCADE)
-    to = models.CharField(max_length=50)
+    id = models.UUIDField(default=uuid.uuid4, primary_key=True, unique=True, editable=False)
+    mailbox = models.ForeignKey(Mailbox, to_field='id', on_delete=models.CASCADE, default=uuid.uuid4)
+    template = models.ForeignKey(Template, to_field='id', on_delete=models.CASCADE, default=uuid.uuid4)
+    to = ArrayField(models.CharField(max_length=50, blank=False, null=False), blank=False, null=False)
     cc = ArrayField(models.CharField(max_length=50, blank=False, null=False), blank=True, null=True)
     bcc = ArrayField(models.CharField(max_length=50, blank=False, null=False), blank=True, null=True)
     reply_to = models.EmailField(default=None)
