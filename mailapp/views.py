@@ -15,11 +15,6 @@ class MailboxDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = Mailbox_serializer
 
 
-class EmailCreate(generics.CreateAPIView):
-    queryset = Email.objects.all()
-    serializer_class = Email_serializerCreate
-
-
 class TemplateListCreate(generics.ListCreateAPIView):
     queryset = Template.objects.all()
     serializer_class = Template_serializer
@@ -30,8 +25,16 @@ class TemplateDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = Template_serializer
 
 
+"""Divided List and Create view due to problems with html does not support array type error"""
+
+
 class EmailListView(generics.ListAPIView):
     queryset = Email.objects.all()
     serializer_class = EmailList
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = EmailFilter
+
+
+class EmailCreate(generics.CreateAPIView):
+    queryset = Email.objects.all()
+    serializer_class = Email_serializerCreate
